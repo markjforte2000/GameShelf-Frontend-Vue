@@ -1,25 +1,35 @@
 <template>
-  <div class="fill-height">
-    <sidebar-menu :menu="menu" relative="true" width="15vw" id="sidebar"/>
-  </div>
+  <sidebar-menu :menu="menu" relative="true" width="15vw" id="sidebar">
+      <span slot="toggle-icon">
+        <font-awesome-icon :icon="['fas', 'bars']" :style="{ color: 'white' }"/>
+      </span>
+  </sidebar-menu>
 </template>
 
 <script>
 function buildSidebar(titles) {
-  let sideBarOptions = [
-  ]
+  let sideBarOptions = [];
   titles.forEach(title => {
     sideBarOptions.push({
       href: '#',
       title: title,
-      icon: 'fa fa-user'
+      icon: {
+        element: 'font-awesome-icon',
+        class: "sidebar-icon",
+        attributes: {
+          icon: "gamepad"
+        }
+      }
     })
-  })
+  });
   return sideBarOptions;
 }
-function dynamicResize() {
-  let header = document.getElementById('main-nav')
-  document.getElementById('sidebar').style.height = window.innerHeight - header.offsetHeight + "px"
+function removeIconBackground() {
+  let iconSet = document.getElementsByClassName("sidebar-icon");
+  for (let i =  0; i < iconSet.length; i++) {
+    console.log(iconSet[i]);
+    iconSet[i].style.backgroundColor = "transparent";
+  }
 }
 export default {
   props: {
@@ -31,10 +41,12 @@ export default {
     }
   },
   mounted() {
-    dynamicResize()
+    removeIconBackground();
   }
 }
 </script>
 
 <style scoped>
+#sidebar {
+}
 </style>

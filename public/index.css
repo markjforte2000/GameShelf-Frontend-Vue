@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    background-color: #211a21;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+* {
+    scrollbar-color: #cec9cc transparent;
+    scrollbar-width: none;
+}

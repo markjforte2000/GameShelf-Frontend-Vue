@@ -1,66 +1,65 @@
 <template>
-  <div class="main-nav" id="main-nav">
-    <nav class="fill">
-      <h4 class="brand nav-item">My Game Library</h4>
-      <form class="nav-item">
-        <label hidden for="search-bar">Search Bar</label>
-        <div class="search-wrapper">
-          <font-awesome-icon :icon="['fas', 'search']" :style="{ color: 'white' }" class="search-icon"/>
-          <input id="search-bar" type="text" class="search">
+  <div class="nav-wrapper">
+    <div class="main-nav" id="main-nav">
+      <nav class="fill">
+        <div class="left">
+          <GameSelectDropdown class="nav-item"></GameSelectDropdown>
         </div>
-      </form>
-    </nav>
+        <div class="center">
+          <SearchBar class="nav-item"></SearchBar>
+        </div>
+        <div class="right">
+
+        </div>
+      </nav>
+    </div>
+    <div class="nav-buffer">
+
+    </div>
   </div>
 </template>
 
 <script>
+import GameSelectDropdown from "./GameSelectDropdown";
+import SearchBar from "./SearchBar";
 export default {
-  name: "Navbar"
+  name: "Navbar",
+  components: {SearchBar, GameSelectDropdown}
 }
 </script>
 
 <style scoped>
-.main-nav {
-  width: 100vw;
-  height: 10vh;
-  background-color: #2a2a2e;
-}
-h4 {
-  margin: 0;
-  color: white;
-}
-.fill {
-  width: 100%;
-  height: 100%;
-}
-nav {
-  display: flex;
-  align-items: center;
-  padding-left: 1vw;
-  padding-right: 1vw;;
-}
-.nav-item {
-  padding-left: 0.5vw;
-  padding-right: 0.5vw;
-}
-.search-wrapper {
-  width: 30vw;
-  height: 6vh;
+  .main-nav {
+    width: 100vw;
+    height: 10vh;
+    background-color: #cec9cc;
+    position: fixed;
+    z-index: 10;
+  }
+  .nav-buffer {
+    width: 100vw;
+    height: 10vh;
+  }
+  h4 {
+    margin: 0;
+    color: white;
 
-}
-input[type=text]:focus {
-  outline: none;
-  background-color: white;
-}
-input[type=text] {
-  border-radius: 5px;
-  outline: none;
-  background-color: #47474a;
-  border: none;
-  font-size: 100%;
-  width: 100%;
-  height: 100%;
-}
-.search-icon {
-}
+  }
+  .fill {
+    height: 100%;
+  }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1vw;
+    padding-right: 1vw;
+  }
+  .nav-item {
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+  }
+  .left, .right {
+    flex: 1;
+  }
 </style>

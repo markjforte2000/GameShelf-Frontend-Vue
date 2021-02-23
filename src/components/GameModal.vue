@@ -1,14 +1,11 @@
 <template>
     <div class="game-modal-wrapper">
         <div class="game-modal">
-            <div class="left">
-                <img :src="game.cover.url" :alt="game.title">
-                <a :href="getDownloadLink(game.id)" :download="game.fileName" class="modal-button"><h4>Download</h4></a>
-                <a href="#" class="modal-button"><h4>Create Shareable Link</h4></a>
-            </div>
-            <div class="right">
+            <div>
                 <h3>{{game.title}}</h3>
                 <h5>{{translateReleaseDate(game.releaseDate)}}</h5>
+                <h5>|</h5>
+                <h5>Nintendo SNES</h5><br>
                 <div class="genre-list">
                     <h5>Genres: </h5>
                     <a v-for="genre in game.genres"
@@ -17,9 +14,12 @@
                     ><h5>{{genre.name}}</h5></a>
                 </div>
 
+                <img :src="game.cover.url" :alt="game.title">
+                <a :href="getDownloadLink(game.id)" :download="game.fileName" class="modal-button"><h4>Download</h4></a>
+                <a href="#" class="modal-button"><h4>Create Shareable Link</h4></a>
             </div>
-            <button class="exit-button">
-                <font-awesome-icon :icon="['fas', 'times-circle']" :style="{ color: ' #4f43ae' }" class="exit"/>
+            <button class="exit-button" @click="onExitPress">
+                <font-awesome-icon :icon="['fas', 'times-circle']" :style="{ color: ' #b5b6e4' }" :class="'exit'"/>
             </button>
         </div>
     </div>
@@ -37,6 +37,9 @@
             },
             translateReleaseDate: function (dateRaw) {
                 return "Release Year: " + dateRaw.substring(0, 4)
+            },
+            onExitPress: function() {
+                this.$emit("close")
             }
         }
     }
@@ -54,10 +57,10 @@
     }
     .game-modal {
         position: fixed;
-        top: 12.5vh;
-        left: 25vw;
-        width: 50vw;
-        height: 75vh;
+        top: 5vh;
+        left: 35vw;
+        width: 30vw;
+        height: 90vh;
         background-color: #211a21;
         color: #cec9cc;
         border-radius: 25px;
@@ -72,13 +75,17 @@
         margin-top: 0;
         margin-bottom: 1vh;
         color: #b5b6e4;
+        display: inline;
+        margin-left: 0.5vw;
     }
     a {
         text-decoration: none;
     }
     .modal-button {
         display: flex;
-        width: 100%;
+        width: calc(100% - 2vw);
+        margin-left: 1vw;
+        margin-right: 1vw;
         height: 6vh;
         text-align: center;
         border-radius: 25px;
@@ -91,21 +98,20 @@
         flex: 1;
     }
     .modal-button+.modal-button {
-        margin-top: 0.5vh;
+        margin-top: 1.5vh;
     }
-    .left, .right {
-        flex: 1;
-        margin: 1vw;
+    .modal-button:hover {
+        background-color: #cec9cc;
     }
     img {
         border-radius: 25px;
+        margin: 1vh 1vw 1vh 1vw;
     }
     .genre-list {
         display: inline;
     }
     .genre-list h5 {
-        display: inline;
-        margin-left: 0.5vw;
+
     }
     .genre-list a h5:hover {
         color: #cec9cc;
@@ -115,13 +121,14 @@
     }
     .exit-button {
         position: absolute;
-        right: 2vw;
-        top: 2vh;
+        right: 1vw;
+        top: 1vw;
         outline: none;
         border: none;
         background-color: transparent;
+        color: #b5b6e4;
     }
-    .exit-button:hover {
-        color: #cec9cc;
+    .exit-button:hover svg {
+        color: #cec9cc !important;
     }
 </style>
