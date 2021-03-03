@@ -2,8 +2,7 @@
   <div id="app">
     <Navbar></Navbar>
     <div class="inline">
-<!--      <Sidebar class="dynamic-height" v-bind:titles="['GBA', 'GBC', 'N64', 'PS3']"></Sidebar>-->
-      <Content class="dynamic-height dynamic-width"></Content>
+      <Content class="dynamic-width"></Content>
     </div>
   </div>
 </template>

@@ -1,19 +1,18 @@
 <template>
     <div class="game-modal-wrapper">
         <div class="game-modal">
-            <div>
+            <div class="fill">
                 <h3>{{game.title}}</h3>
                 <h5>{{translateReleaseDate(game.releaseDate)}}</h5>
-                <h5>|</h5>
+                <h5> | </h5>
                 <h5>Nintendo SNES</h5><br>
                 <div class="genre-list">
                     <h5>Genres: </h5>
-                    <a v-for="genre in game.genres"
+                    <a v-for="(genre, index) in game.genres"
                        :key="genre.id"
                        href="#"
-                    ><h5>{{genre.name}}</h5></a>
-                </div>
-
+                    ><h5>{{genre.name}}</h5><h5 v-if="index + 1 < game.genres.length">, </h5></a>
+                </div><br>
                 <img :src="game.cover.url" :alt="game.title">
                 <a :href="getDownloadLink(game.id)" :download="game.fileName" class="modal-button"><h4>Download</h4></a>
                 <a href="#" class="modal-button"><h4>Create Shareable Link</h4></a>
@@ -56,11 +55,11 @@
         background-color: rgba(0, 0, 0, 0.5);
     }
     .game-modal {
-        position: fixed;
+        position: relative;
         top: 5vh;
         left: 35vw;
         width: 30vw;
-        height: 90vh;
+        min-height: 90vh;
         background-color: #211a21;
         color: #cec9cc;
         border-radius: 25px;
@@ -76,7 +75,6 @@
         margin-bottom: 1vh;
         color: #b5b6e4;
         display: inline;
-        margin-left: 0.5vw;
     }
     a {
         text-decoration: none;
@@ -97,6 +95,9 @@
     .modal-button h4 {
         flex: 1;
     }
+    .fill {
+        flex: 1;
+    }
     .modal-button+.modal-button {
         margin-top: 1.5vh;
     }
@@ -106,9 +107,14 @@
     img {
         border-radius: 25px;
         margin: 1vh 1vw 1vh 1vw;
+        flex: 1;
     }
     .genre-list {
-        display: inline;
+        display: inline-block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow:ellipsis;
+        width: 25vw;
     }
     .genre-list h5 {
 
